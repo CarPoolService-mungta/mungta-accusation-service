@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study_db?useSSL=false
+    username: study_user
+    password: 1234
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+logging:
+  level:
+    org.hibernate.type: info
+    org.springframework.cloud: info
+    com.mungta.accusation: info

@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study_db?useSSL=false
+    username: study_user
+    password: 1234
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+
+logging:
+  level:
+    org.hibernate.type: debug
+    org.springframework.cloud: debug
+    com.mungta.accusation: debug
