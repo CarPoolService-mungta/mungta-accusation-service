@@ -112,7 +112,7 @@ class AccusationServiceTest {
 
         assertThatThrownBy(() -> accusationService.getAccusation(2L, MEMBER_ID))
                 .isInstanceOf(ApiException.class)
-                .hasMessage("등록되지 않은 신고글입니다.");
+                .hasMessage("해당 신고글을 찾을 수 없습니다.");
     }
 
     @DisplayName("[회원] 신고(accusation) 등록한 회원 ID와 파라미터로 받은 회원 ID가 일치하지 않는 경우 Exception 발생.")

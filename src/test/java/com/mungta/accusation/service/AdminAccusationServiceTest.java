@@ -115,7 +115,7 @@ class AdminAccusationServiceTest {
 
         assertThatThrownBy(() -> adminAccusationService.getAccusation(2L))
                 .isInstanceOf(ApiException.class)
-                .hasMessage("등록되지 않은 신고글입니다.");
+                .hasMessage("해당 신고글을 찾을 수 없습니다.");
     }
 
     @DisplayName("[관리자] 신고 내역 리스트 조회 성공.")
