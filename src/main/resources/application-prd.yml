@@ -1,23 +1,78 @@
+server:
+  port: 8089
+
+springdoc:
+  swagger-ui:
+    operationsSorter: method
+
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: validate
+  config:
+    activate:
+      on-profile: prd
   flyway:
     baseline-on-migrate: true
     baseline-version: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/study_db?useSSL=false
-    username: study_user
-    password: 1234
+    url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?useSSL=false&serverTimezone=Asia/Seoul
+    username: mungta
+    password: xx
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 10
+      pool-name: mungta_accusation_pool
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: xxx@gmail.com
+    password: xxx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  thymeleaf:
+    prefix: classpath:/static/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    check-template-location: true
   cloud:
     stream:
       kafka:
         binder:
           brokers: localhost:9092
+        bindings:
+          producer-out-0:
+            producer:
+              configuration:
+                key:
+                  serializer: org.apache.kafka.common.serialization.StringSerializer
+      bindings:
+        producer-out-0:
+          destination: accusation-topic
+          contentType: application/json
+
+api:
+  url:
+    user: http://localhost:8081/mungta/users
+    party: http://localhost:8082/mungta/parties
 
 logging:
   level:
     org.hibernate.type: info
     org.springframework.cloud: info
     com.mungta.accusation: info
+

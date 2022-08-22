@@ -1,14 +1,30 @@
 server:
   port: 8089
----
+
 springdoc:
   swagger-ui:
     operationsSorter: method
 
 spring:
   profiles:
-    active: dev
+    activate: local
+  flyway:
+    enabled: false
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?useSSL=false&serverTimezone=Asia/Seoul
+      username: mungta
+      password: xx
+      hikari:
+        auto-commit: false
+        connection-test-query: SELECT 1
+        minimum-idle: 5
+        maximum-pool-size: 10
+        pool-name: mungta_accusation_pool
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create
     open-in-view: false
     properties:
       hibernate:
@@ -34,6 +50,8 @@ spring:
   cloud:
     stream:
       kafka:
+        binder:
+          brokers: localhost:9092
         bindings:
           producer-out-0:
             producer:
@@ -50,26 +68,32 @@ api:
     user: http://localhost:8081/mungta/users
     party: http://localhost:8082/mungta/parties
 
----
-spring:
-  profiles: docker
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:9092
-        bindings:
-          producer-out-0:
-            producer:
-              configuration:
-                key:
-                  serializer: org.apache.kafka.common.serialization.StringSerializer
-      bindings:
-        producer-out-0:
-          destination: accusation-topic
-          contentType: application/json
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework.cloud: debug
+    com.mungta.accusation: debug
 
-api:
-  url:
-    user: http://gateway:8080
-    party: http://gateway:8080
+---
+#spring:
+#  profiles: docker
+#  cloud:
+#    stream:
+#      kafka:
+#        binder:
+#          brokers: localhost:9092
+#        bindings:
+#          producer-out-0:
+#            producer:
+#              configuration:
+#                key:
+#                  serializer: org.apache.kafka.common.serialization.StringSerializer
+#      bindings:
+#        producer-out-0:
+#          destination: accusation-topic
+#          contentType: application/json
+#
+#api:
+#  url:
+#    user: http://gateway:8080
+#    party: http://gateway:8080
