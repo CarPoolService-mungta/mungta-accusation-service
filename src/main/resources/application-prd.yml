@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8080
 
 springdoc:
   swagger-ui:
@@ -14,7 +14,7 @@ spring:
     baseline-version: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?serverTimezone=Asia/Seoul
     username: mungta
     password: xx
     hikari:
@@ -67,8 +67,8 @@ spring:
 
 api:
   url:
-    user: http://localhost:8081/mungta/users
-    party: http://localhost:8082/mungta/parties
+    user: http://gateway:8080/mungta/users
+    party: http://gateway:8080/mungta/parties
 
 logging:
   level:

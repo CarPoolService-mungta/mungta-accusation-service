@@ -10,17 +10,17 @@ spring:
     activate: local
   flyway:
     enabled: false
-    datasource:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?useSSL=false&serverTimezone=Asia/Seoul
-      username: mungta
-      password: xx
-      hikari:
-        auto-commit: false
-        connection-test-query: SELECT 1
-        minimum-idle: 5
-        maximum-pool-size: 10
-        pool-name: mungta_accusation_pool
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?serverTimezone=Asia/Seoul
+    username: mungta
+    password: xx
+    hikari:
+      auto-commit: false
+      connection-test-query: SELECT 1
+      minimum-idle: 5
+      maximum-pool-size: 10
+      pool-name: mungta_accusation_pool
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
