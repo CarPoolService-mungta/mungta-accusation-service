@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.mungta.accusation.constants.AccusationTestSample.*;
@@ -115,7 +116,8 @@ class AccusationControllerTest {
     @Test
     void getAccusationList() throws Exception {
 
-        doReturn(AccusationListResponse.of(List.of(accusation)))
+        // doReturn(AccusationListResponse.of(List.of(accusation)))
+        doReturn(AccusationListResponse.of(Arrays.asList(accusation)))
                 .when(accusationService).getAccusationList(MEMBER_ID);
 
         ResultActions result = mockMvc.perform(
