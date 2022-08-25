@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.mungta.accusation.constants.AccusationTestSample.*;
@@ -95,7 +96,8 @@ class AdminAccusationControllerTest {
     @DisplayName("[관리자] 회원 신고 리스트 조회 API")
     @Test
     void getAccusationList() throws Exception {
-        AdminAccusationListResponse response = AdminAccusationListResponse.of(List.of(accusation));
+        //AdminAccusationListResponse response = AdminAccusationListResponse.of(List.of(accusation));
+        AdminAccusationListResponse response = AdminAccusationListResponse.of(Arrays.asList(accusation));
 
         doReturn(response)
                 .when(adminAccusationService).getAccusationList();

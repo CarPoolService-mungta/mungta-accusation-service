@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,7 +122,8 @@ class AdminAccusationServiceTest {
     @DisplayName("[관리자] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        given(accusationRepository.findAll()).willReturn(List.of(accusation));
+        //given(accusationRepository.findAll()).willReturn(List.of(accusation));
+        given(accusationRepository.findAll()).willReturn(Arrays.asList(accusation));
 
         AdminAccusationListResponse response = adminAccusationService.getAccusationList();
         List<AdminAccusationInfoResponse> responseList = response.getAccusations();

@@ -16,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,7 +130,8 @@ class AccusationServiceTest {
     @DisplayName("[회원] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        given(accusationRepository.findByMemberId(MEMBER_ID)).willReturn(List.of(accusation));
+        //given(accusationRepository.findByMemberId(MEMBER_ID)).willReturn(List.of(accusation));
+        given(accusationRepository.findByMemberId(MEMBER_ID)).willReturn(Arrays.asList(accusation));
 
         AccusationListResponse response = accusationService.getAccusationList(MEMBER_ID);
         List<AccusationInfoResponse> responseList = response.getAccusations();
@@ -152,7 +155,8 @@ class AccusationServiceTest {
     @DisplayName("[회원] 해당 memberId로 등록한 신고가 하나도 없는 경우 빈 리스트를 반환.")
     @Test
     void getAccusationList_size_zero() {
-        given(accusationRepository.findByMemberId("2")).willReturn(List.of());
+        //given(accusationRepository.findByMemberId("2")).willReturn(List.of());
+        given(accusationRepository.findByMemberId("2")).willReturn(new ArrayList<>());
 
         AccusationListResponse response = accusationService.getAccusationList("2");
 
