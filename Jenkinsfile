@@ -6,6 +6,16 @@ pipeline {
             sh './mvnw compile'
         }
     }
+    stage('Unit Test') {
+        steps {
+            sh './mvnw test'
+        }
+        post {
+            always {
+                junit 'target/surefire-reports/*.xml'
+            }
+        }
+    }
     stage('Package') {
         steps {
             sh "./mvnw package -DskipTests"
