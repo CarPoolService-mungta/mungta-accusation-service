@@ -14,7 +14,7 @@
 	<name>mungta-accusation-service</name>
 	<description>Mungta Accusation Service</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>11</java.version>
 		<jacoco.version>0.8.5</jacoco.version>
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
 		<spring-cloud-stream.version>3.2.4</spring-cloud-stream.version>
@@ -172,6 +172,14 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>9</source>
+					<target>9</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

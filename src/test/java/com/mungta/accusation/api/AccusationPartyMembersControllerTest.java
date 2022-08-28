@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.mungta.accusation.constants.AccusationTestSample.*;
@@ -65,8 +64,7 @@ class AccusationPartyMembersControllerTest {
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
                 .startedDateTime(STARTED_DATE_TIME)
-                //.memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
-                .memberIds(Arrays.asList(MEMBER_ID, ACCUSED_MEMBER_ID))
+                .memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
                 .build();
     }
 
@@ -78,8 +76,7 @@ class AccusationPartyMembersControllerTest {
                 .image("")
                 .accusedYN(false)
                 .build();
-        //return List.of(memberResponse);
-        return Arrays.asList(memberResponse);
+        return List.of(memberResponse);
     }
 
 }
