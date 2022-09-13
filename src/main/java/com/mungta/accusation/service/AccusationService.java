@@ -41,7 +41,7 @@ public class AccusationService {
                                 AccusedMember.builder()
                                         .id(accusedMember.getId())
                                         .name(accusedMember.getName())
-                                        .emailAddress(accusedMember.getEmailAddress())
+                                        .email(accusedMember.getEmail())
                                         .build()
                         )
                         .accusationContents(

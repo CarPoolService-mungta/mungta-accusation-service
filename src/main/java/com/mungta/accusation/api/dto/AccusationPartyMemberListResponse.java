@@ -49,7 +49,10 @@ public class AccusationPartyMemberListResponse {
         private String name;
 
         @Schema(description = "회원 Email")
-        private String emailAddress;
+        private String email;
+
+        @Schema(description = "회원 부서")
+        private String department;
 
         @Schema(description = "회원 사진")
         private String image;

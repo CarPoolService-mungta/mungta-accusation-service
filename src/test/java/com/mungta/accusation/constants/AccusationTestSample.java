@@ -16,6 +16,7 @@ public class AccusationTestSample {
     public static final String ACCUSED_MEMBER_ID = "2";
     public static final String ACCUSED_MEMBER_NAME = "통통이";
     public static final String ACCUSED_MEMBER_EMAIL = "xxx@sk.com";
+    public static final String ACCUSED_MEMBER_DEPARTMENT = "금융부서";
     public static final String CONTENTS_TITLE = "신고합니다.";
     public static final String CONTENTS_DESC = "내용";
 
@@ -36,7 +37,7 @@ public class AccusationTestSample {
                         AccusedMemberRequest.builder()
                                 .id(ACCUSED_MEMBER_ID)
                                 .name(ACCUSED_MEMBER_NAME)
-                                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                                .email(ACCUSED_MEMBER_EMAIL)
                                 .build()
                 )
                 .accusationContents(

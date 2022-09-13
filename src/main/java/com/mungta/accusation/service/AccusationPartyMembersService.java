@@ -67,7 +67,8 @@ public class AccusationPartyMembersService {
                     return MemberResponse.builder()
                             .id(userResponse.getId())
                             .name(userResponse.getName())
-                            .emailAddress(userResponse.getEmailAddress())
+                            .email(userResponse.getEmail())
+                            .department(userResponse.getDepartment())
                             .image(new String(byteEnc64, StandardCharsets.UTF_8))
                             .accusedYN(preAccusedMemberIdList.contains(userResponse.getId()))
                             .build();

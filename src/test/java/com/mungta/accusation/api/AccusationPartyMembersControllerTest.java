@@ -53,7 +53,8 @@ class AccusationPartyMembersControllerTest {
                 .andExpect(jsonPath("$.members.length()").value(1))
                 .andExpect(jsonPath("$.members[0].id").value(ACCUSED_MEMBER_ID))
                 .andExpect(jsonPath("$.members[0].name").value(ACCUSED_MEMBER_NAME))
-                .andExpect(jsonPath("$.members[0].emailAddress").value(ACCUSED_MEMBER_EMAIL))
+                .andExpect(jsonPath("$.members[0].email").value(ACCUSED_MEMBER_EMAIL))
+                .andExpect(jsonPath("$.members[0].department").value(ACCUSED_MEMBER_DEPARTMENT))
                 .andExpect(jsonPath("$.members[0].image").value(""))
                 .andExpect(jsonPath("$.members[0].accusedYN").value(false));
     }
@@ -72,7 +73,8 @@ class AccusationPartyMembersControllerTest {
         MemberResponse memberResponse = MemberResponse.builder()
                 .id(ACCUSED_MEMBER_ID)
                 .name(ACCUSED_MEMBER_NAME)
-                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                .email(ACCUSED_MEMBER_EMAIL)
+                .department(ACCUSED_MEMBER_DEPARTMENT)
                 .image("")
                 .accusedYN(false)
                 .build();

@@ -58,7 +58,8 @@ class AccusationPartyMembersServiceTest {
                         MemberResponse.builder()
                                 .id(ACCUSED_MEMBER_ID)
                                 .name(ACCUSED_MEMBER_NAME)
-                                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                                .email(ACCUSED_MEMBER_EMAIL)
+                                .department(ACCUSED_MEMBER_DEPARTMENT)
                                 .image("")
                                 .accusedYN(false)
                                 .build()
@@ -81,7 +82,8 @@ class AccusationPartyMembersServiceTest {
         UserResponse userResponse = UserResponse.builder()
                 .id(ACCUSED_MEMBER_ID)
                 .name(ACCUSED_MEMBER_NAME)
-                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                .email(ACCUSED_MEMBER_EMAIL)
+                .department(ACCUSED_MEMBER_DEPARTMENT)
                 .image(new byte[0])
                 .build();
         return List.of(userResponse);
