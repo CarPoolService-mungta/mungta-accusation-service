@@ -23,7 +23,7 @@ import java.net.URI;
 @Tag(name = "ACCUSATION", description = "신고 API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/mungta/accusations")
+@RequestMapping("/api/accusation")
 public class AccusationController {
 
     private final AccusationService accusationService;
@@ -35,7 +35,7 @@ public class AccusationController {
     @PostMapping
     public ResponseEntity addAccusation(@Valid @RequestBody AccusationRequest request) {
         long id = accusationService.addAccusation(request);
-        return ResponseEntity.created(URI.create("/mungta/accusations/" + id)).build();
+        return ResponseEntity.created(URI.create("/api/accusation/list/" + id)).build();
     }
 
     @Operation(summary = "신고 조회")
@@ -44,7 +44,7 @@ public class AccusationController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccusationResponse.class))})
     })
-    @GetMapping("/{id}")
+    @GetMapping("/list/{id}")
     public ResponseEntity<AccusationResponse> getAccusation(@Parameter(description = "신고 ID") @PathVariable long id,
                                                             @RequestParam String memberId) {
         AccusationResponse response = accusationService.getAccusation(id, memberId);
@@ -69,7 +69,7 @@ public class AccusationController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = AccusationResponse.class))})
     })
-    @PutMapping("/{id}")
+    @PutMapping("/list/{id}")
     public ResponseEntity<AccusationResponse> modifyAccusation(@Parameter(description = "신고 ID") @PathVariable long id,
                                                                @Valid @RequestBody AccusationContentsRequest request) {
         AccusationResponse response = accusationService.modifyAccusationContents(id, request);
@@ -80,7 +80,7 @@ public class AccusationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "신고 삭제 성공")
     })
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/list/{id}")
     public ResponseEntity deleteAccusation(@Parameter(description = "신고 ID") @PathVariable long id) {
         accusationService.deleteAccusation(id);
         return ResponseEntity.noContent().build();

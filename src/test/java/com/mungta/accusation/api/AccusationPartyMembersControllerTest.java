@@ -38,7 +38,7 @@ class AccusationPartyMembersControllerTest {
                 .when(accusationPartyMembersService).getAccusationPartyMembers(MEMBER_ID, PARTY_ID);
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/accusation/party-members")
+                get("/api/accusation/party-members")
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
                         .param("partyId", String.valueOf(PARTY_ID))

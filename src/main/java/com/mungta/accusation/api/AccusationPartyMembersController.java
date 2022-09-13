@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "ACCUSATION MEMBER", description = "신고 대상 조회 API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/mungta/accusation/party-members")
+@RequestMapping("/api/accusation/party-members")
 public class AccusationPartyMembersController {
 
     private final AccusationPartyMembersService accusationPartyMembersService;

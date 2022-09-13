@@ -75,7 +75,7 @@ class AdminAccusationControllerTest {
                 .when(adminAccusationService).getAccusation(ACCUSATION_ID);
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/admin/accusations/" + ACCUSATION_ID)
+                get("/api/accusation/admin/accusations/" + ACCUSATION_ID)
                         .accept(MediaType.APPLICATION_JSON)
         );
 
@@ -101,7 +101,7 @@ class AdminAccusationControllerTest {
                 .when(adminAccusationService).getAccusationList();
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/admin/accusations")
+                get("/api/accusation/admin/accusations")
                         .accept(MediaType.APPLICATION_JSON)
         );
 
@@ -126,7 +126,7 @@ class AdminAccusationControllerTest {
                 .when(adminAccusationService).processAccusation(anyLong(), any());
 
         ResultActions result = mockMvc.perform(
-                put("/mungta/admin/accusations/" + ACCUSATION_ID)
+                put("/api/accusation/admin/accusations/" + ACCUSATION_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper()

@@ -76,14 +76,14 @@ class AccusationControllerTest {
                 .when(accusationService).addAccusation(any());
 
         ResultActions result = mockMvc.perform(
-                post("/mungta/accusations")
+                post("/api/accusation")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(ACCUSATION_REQUEST))
         );
 
         result.andExpect(status().isCreated())
-                .andExpect(header().string("Location", "/mungta/accusations/" + ACCUSATION_ID));
+                .andExpect(header().string("Location", "/api/accusation/list/" + ACCUSATION_ID));
     }
 
     @DisplayName("[회원] 신고 조회 API")
@@ -94,7 +94,7 @@ class AccusationControllerTest {
                 .when(accusationService).getAccusation(ACCUSATION_ID, MEMBER_ID);
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/accusations/" + ACCUSATION_ID)
+                get("/api/accusation/list/" + ACCUSATION_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
         );
@@ -119,7 +119,7 @@ class AccusationControllerTest {
                 .when(accusationService).getAccusationList(MEMBER_ID);
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/accusations")
+                get("/api/accusation")
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
         );
@@ -143,7 +143,7 @@ class AccusationControllerTest {
                 .when(accusationService).modifyAccusationContents(anyLong(), any());
 
         ResultActions result = mockMvc.perform(
-                put("/mungta/accusations/" + ACCUSATION_ID)
+                put("/api/accusation/list/" + ACCUSATION_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper()
@@ -175,7 +175,7 @@ class AccusationControllerTest {
                 .when(accusationService).deleteAccusation(ACCUSATION_ID);
 
         ResultActions result = mockMvc.perform(
-                delete("/mungta/accusations/" + ACCUSATION_ID)
+                delete("/api/accusation/list/" + ACCUSATION_ID)
                         .accept(MediaType.APPLICATION_JSON)
         );
 
