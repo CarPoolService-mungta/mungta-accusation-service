@@ -17,6 +17,13 @@ pipeline {
             }
         }
     }
+    stage('Static Code Analysis') {
+        steps {
+            configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+                sh './mvnw sonar:sonar -s $MAVEN_SETTINGS'
+            }
+        }
+    }
     stage('Package') {
         steps {
             sh "./mvnw package -DskipTests"
