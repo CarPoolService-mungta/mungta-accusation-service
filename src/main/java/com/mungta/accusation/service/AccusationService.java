@@ -76,7 +76,7 @@ public class AccusationService {
     }
 
     public AccusationListResponse getAccusationList(final String memberId) {
-        return AccusationListResponse.of(accusationRepository.findByMemberId(memberId));
+        return AccusationListResponse.of(accusationRepository.findByMemberIdOrderByCreatedDateTimeDesc(memberId));
     }
 
     @Transactional

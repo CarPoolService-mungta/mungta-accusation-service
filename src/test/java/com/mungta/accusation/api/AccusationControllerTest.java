@@ -65,7 +65,7 @@ class AccusationControllerTest {
                 )
                 .build();
         accusation.setId(ACCUSATION_ID);
-        accusation.setCreatedDateTime(LocalDateTime.now());
+        accusation.setModifiedDateTime(LocalDateTime.now());
     }
 
     @DisplayName("[회원] 신고 등록 API")
@@ -132,7 +132,7 @@ class AccusationControllerTest {
                 .andExpect(jsonPath("$.accusations[0].partyId").value(PARTY_ID))
                 .andExpect(jsonPath("$.accusations[0].title").value(CONTENTS_TITLE))
                 .andExpect(jsonPath("$.accusations[0].accusationStatus").value("REGISTERED"))
-                .andExpect(jsonPath("$.accusations[0].createdDateTime").exists());
+                .andExpect(jsonPath("$.accusations[0].modifiedDateTime").exists());
     }
 
     @DisplayName("[회원] 신고 내용 수정 API")

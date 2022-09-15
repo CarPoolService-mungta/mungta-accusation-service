@@ -40,7 +40,7 @@ public class AdminAccusationService {
     }
 
     public AdminAccusationListResponse getAccusationList() {
-        return AdminAccusationListResponse.of(accusationRepository.findAll());
+        return AdminAccusationListResponse.of(accusationRepository.findAllByOrderByCreatedDateTimeDesc());
     }
 
     @Transactional
@@ -52,10 +52,10 @@ public class AdminAccusationService {
             AccusedMember accusedMember = accusation.getAccusedMember();
 
             // 회원 시스템으로 신고당한 사람 ID 전송
-            kafkaProducer.send(BINDING_NAME, new AccusationCompleted(accusedMember.getId()));
+            //kafkaProducer.send(BINDING_NAME, new AccusationCompleted(accusedMember.getId()));
 
             // 신고당한 사람에게 이메일 전송..
-            penaltyMailService.send(accusedMember);
+            //penaltyMailService.send(accusedMember);
         }
         log.info("Changed to '{}' status. id: {}", request.getAccusationStatus(), id);
         return AdminAccusationResponse.of(accusation);

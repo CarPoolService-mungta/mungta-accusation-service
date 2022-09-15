@@ -65,7 +65,7 @@ class AccusationServiceTest {
                 )
                 .build();
         accusation.setId(ACCUSATION_ID);
-        accusation.setCreatedDateTime(nowDateTime);
+        accusation.setModifiedDateTime(nowDateTime);
     }
 
     @DisplayName("[회원] 신고 등록.")
@@ -132,7 +132,7 @@ class AccusationServiceTest {
     @DisplayName("[회원] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        given(accusationRepository.findByMemberId(MEMBER_ID)).willReturn(List.of(accusation));
+        given(accusationRepository.findByMemberIdOrderByCreatedDateTimeDesc(MEMBER_ID)).willReturn(List.of(accusation));
 
         AccusationListResponse response = accusationService.getAccusationList(MEMBER_ID);
         List<AccusationInfoResponse> responseList = response.getAccusations();
@@ -145,7 +145,7 @@ class AccusationServiceTest {
                                 .partyId(PARTY_ID)
                                 .title(CONTENTS_TITLE)
                                 .accusationStatus(AccusationStatus.REGISTERED)
-                                .createdDateTime(nowDateTime.format(
+                                .modifiedDateTime(nowDateTime.format(
                                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                                 ))
                                 .build()
@@ -156,7 +156,7 @@ class AccusationServiceTest {
     @DisplayName("[회원] 해당 memberId로 등록한 신고가 하나도 없는 경우 빈 리스트를 반환.")
     @Test
     void getAccusationList_size_zero() {
-        given(accusationRepository.findByMemberId("2")).willReturn(List.of());
+        given(accusationRepository.findByMemberIdOrderByCreatedDateTimeDesc("2")).willReturn(List.of());
 
         AccusationListResponse response = accusationService.getAccusationList("2");
 

@@ -78,7 +78,7 @@ class AdminAccusationServiceTest {
                 )
                 .build();
         accusation.setId(ACCUSATION_ID);
-        accusation.setCreatedDateTime(nowDateTime);
+        accusation.setModifiedDateTime(nowDateTime);
     }
 
     @DisplayName("[관리자] 신고 내용 조회.")
@@ -126,7 +126,7 @@ class AdminAccusationServiceTest {
     @DisplayName("[관리자] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        given(accusationRepository.findAll()).willReturn(List.of(accusation));
+        given(accusationRepository.findAllByOrderByCreatedDateTimeDesc()).willReturn(List.of(accusation));
 
         AdminAccusationListResponse response = adminAccusationService.getAccusationList();
         List<AdminAccusationInfoResponse> responseList = response.getAccusations();
@@ -140,7 +140,7 @@ class AdminAccusationServiceTest {
                                 .memberId(MEMBER_ID)
                                 .title(CONTENTS_TITLE)
                                 .accusationStatus(AccusationStatus.REGISTERED)
-                                .createdDateTime(nowDateTime.format(
+                                .modifiedDateTime(nowDateTime.format(
                                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                                 ))
                                 .build()

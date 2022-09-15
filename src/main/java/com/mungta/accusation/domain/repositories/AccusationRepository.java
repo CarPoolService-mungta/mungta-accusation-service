@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface AccusationRepository extends JpaRepository<Accusation, Long> {
 
-    List<Accusation> findByMemberId(String memberId);
+    List<Accusation> findByMemberIdOrderByCreatedDateTimeDesc(String memberId);
 
     List<Accusation> findByMemberIdAndPartyInfo(String memberId, PartyInfo partyInfo);
+
+    List<Accusation> findAllByOrderByCreatedDateTimeDesc();
 
 }
