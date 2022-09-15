@@ -1,6 +1,7 @@
 package com.mungta.accusation.service;
 
 import com.mungta.accusation.api.dto.AccusationContentsResponse;
+import com.mungta.accusation.api.dto.AccusedMemberResponse;
 import com.mungta.accusation.api.dto.PartyInfoResponse;
 import com.mungta.accusation.api.dto.admin.AccusationStatusRequest;
 import com.mungta.accusation.api.dto.admin.AdminAccusationListResponse;
@@ -21,7 +22,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,7 +90,11 @@ class AdminAccusationServiceTest {
 
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -122,8 +126,7 @@ class AdminAccusationServiceTest {
     @DisplayName("[관리자] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        //given(accusationRepository.findAll()).willReturn(List.of(accusation));
-        given(accusationRepository.findAll()).willReturn(Arrays.asList(accusation));
+        given(accusationRepository.findAll()).willReturn(List.of(accusation));
 
         AdminAccusationListResponse response = adminAccusationService.getAccusationList();
         List<AdminAccusationInfoResponse> responseList = response.getAccusations();
@@ -158,7 +161,11 @@ class AdminAccusationServiceTest {
         verify(penaltyMailService, times(1)).send(any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -189,7 +196,11 @@ class AdminAccusationServiceTest {
         verify(penaltyMailService, never()).send(any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -220,7 +231,11 @@ class AdminAccusationServiceTest {
         verify(kafkaProducer, times(1)).send(anyString(), any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)

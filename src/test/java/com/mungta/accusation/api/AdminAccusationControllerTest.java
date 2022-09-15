@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.mungta.accusation.constants.AccusationTestSample.*;
@@ -82,7 +81,8 @@ class AdminAccusationControllerTest {
 
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(ACCUSATION_ID))
-                .andExpect(jsonPath("$.accusedMemberName").value(ACCUSED_MEMBER_NAME))
+                .andExpect(jsonPath("$.accusedMember.id").value(ACCUSED_MEMBER_ID))
+                .andExpect(jsonPath("$.accusedMember.name").value(ACCUSED_MEMBER_NAME))
                 .andExpect(jsonPath("$.partyInfo.partyId").value(PARTY_ID))
                 .andExpect(jsonPath("$.partyInfo.placeOfDeparture").value(PLACE_OF_DEPARTURE))
                 .andExpect(jsonPath("$.partyInfo.destination").value(DESTINATION))
@@ -96,8 +96,7 @@ class AdminAccusationControllerTest {
     @DisplayName("[관리자] 회원 신고 리스트 조회 API")
     @Test
     void getAccusationList() throws Exception {
-        //AdminAccusationListResponse response = AdminAccusationListResponse.of(List.of(accusation));
-        AdminAccusationListResponse response = AdminAccusationListResponse.of(Arrays.asList(accusation));
+        AdminAccusationListResponse response = AdminAccusationListResponse.of(List.of(accusation));
 
         doReturn(response)
                 .when(adminAccusationService).getAccusationList();
@@ -140,7 +139,8 @@ class AdminAccusationControllerTest {
 
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(ACCUSATION_ID))
-                .andExpect(jsonPath("$.accusedMemberName").value(ACCUSED_MEMBER_NAME))
+                .andExpect(jsonPath("$.accusedMember.id").value(ACCUSED_MEMBER_ID))
+                .andExpect(jsonPath("$.accusedMember.name").value(ACCUSED_MEMBER_NAME))
                 .andExpect(jsonPath("$.partyInfo.partyId").value(PARTY_ID))
                 .andExpect(jsonPath("$.partyInfo.placeOfDeparture").value(PLACE_OF_DEPARTURE))
                 .andExpect(jsonPath("$.partyInfo.destination").value(DESTINATION))

@@ -1,6 +1,7 @@
 package com.mungta.accusation.api.dto.admin;
 
 import com.mungta.accusation.api.dto.AccusationContentsResponse;
+import com.mungta.accusation.api.dto.AccusedMemberResponse;
 import com.mungta.accusation.api.dto.PartyInfoResponse;
 import com.mungta.accusation.domain.Accusation;
 import com.mungta.accusation.domain.AccusationStatus;
@@ -15,8 +16,7 @@ public class AdminAccusationResponse {
     @Schema(description = "신고 ID")
     private long id;
 
-    @Schema(description = "신고 대상 회원 이름")
-    private String accusedMemberName;
+    private AccusedMemberResponse accusedMember;
 
     private PartyInfoResponse partyInfo;
 
@@ -31,7 +31,9 @@ public class AdminAccusationResponse {
     public static AdminAccusationResponse of(Accusation accusation) {
         return AdminAccusationResponse.builder()
                 .id(accusation.getId())
-                .accusedMemberName(accusation.getAccusedMemberName())
+                .accusedMember(
+                        AccusedMemberResponse.of(accusation.getAccusedMember())
+                )
                 .partyInfo(
                         PartyInfoResponse.of(accusation.getPartyInfo())
                 )

@@ -14,8 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.mungta.accusation.api.dto.AccusationPartyMemberListResponse.MemberResponse;
@@ -46,8 +44,7 @@ class AccusationPartyMembersServiceTest {
     void getAccusationPartyMembers() {
         given(partyServiceClient.getParty(PARTY_ID)).willReturn(getPartyResponse());
         given(userServiceClient.getUserList(anyList())).willReturn(getUserResponseList());
-        //given(accusationRepository.findByMemberIdAndPartyInfo(anyString(), any())).willReturn(List.of());
-        given(accusationRepository.findByMemberIdAndPartyInfo(anyString(), any())).willReturn(new ArrayList<>());
+        given(accusationRepository.findByMemberIdAndPartyInfo(anyString(), any())).willReturn(List.of());
 
         AccusationPartyMemberListResponse response = accusationPartyMembersService.getAccusationPartyMembers(MEMBER_ID, PARTY_ID);
 
@@ -77,8 +74,7 @@ class AccusationPartyMembersServiceTest {
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
                 .startedDateTime(STARTED_DATE_TIME)
-                //.memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
-                .memberIds(Arrays.asList(MEMBER_ID, ACCUSED_MEMBER_ID))
+                .memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
                 .build();
     }
 
@@ -90,8 +86,7 @@ class AccusationPartyMembersServiceTest {
                 .department(ACCUSED_MEMBER_DEPARTMENT)
                 .image(new byte[0])
                 .build();
-        //return List.of(userResponse);
-        return Arrays.asList(userResponse);
+        return List.of(userResponse);
     }
 
 }
