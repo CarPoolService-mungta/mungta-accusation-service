@@ -3,7 +3,7 @@ server:
 
 springdoc:
   swagger-ui:
-    path: /mungta/accusation/swagger-ui.html
+    path: /api/accusation/swagger-ui.html
     operationsSorter: method
 
 spring:
