@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accusation
+  namespace: mungta
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accusation
+  template:
+    metadata:
+      labels:
+        app: accusation
+    spec:
+      containers:
+        - name: accusation
+          image: mungtaregistry.azurecr.io/mungta/dev/accusation-service:latest
