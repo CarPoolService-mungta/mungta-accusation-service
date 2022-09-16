@@ -67,8 +67,8 @@ spring:
 
 api:
   url:
-    user: http://gateway:8080/mungta/users
-    party: http://gateway:8080/mungta/parties
+    user: http://gateway:8080/api/user
+    party: http://gateway:8080/api/party-management/partyInfos/carpool-summary-info
 
 logging:
   level:

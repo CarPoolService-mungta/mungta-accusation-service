@@ -32,7 +32,7 @@ public class AccusationPartyMemberListResponse {
                 .partyId(party.getPartyId())
                 .placeOfDeparture(party.getPlaceOfDeparture())
                 .destination(party.getDestination())
-                .startedDateTime(party.getStartedDateTime())
+                .startedDateTime(party.getStartDate())
                 .members(members)
                 .build();
     }

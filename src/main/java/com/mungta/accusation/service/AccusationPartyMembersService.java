@@ -34,7 +34,7 @@ public class AccusationPartyMembersService {
         log.info("Get PartyInfo from PartyService. partyId: {}", partyId);
         PartyResponse party = partyServiceClient.getParty(partyId);
 
-        List<String> memberIds = party.getMemberIds().stream()
+        List<String> memberIds = party.getUserIds().stream()
                 .filter(id -> !id.equals(memberId))
                 .collect(Collectors.toList());
 
@@ -42,7 +42,6 @@ public class AccusationPartyMembersService {
         List<UserResponse> userList = userServiceClient.getUserList(memberIds);
 
         List<String> preAccusedMemberIdList = getAccusedMemberIdByPartyId(memberId, party);
-
         return AccusationPartyMemberListResponse.of(party, getMemberResponse(userList, preAccusedMemberIdList));
     }
 
@@ -51,7 +50,7 @@ public class AccusationPartyMembersService {
                 .partyId(party.getPartyId())
                 .placeOfDeparture(party.getPlaceOfDeparture())
                 .destination(party.getDestination())
-                .startedDateTime(party.getStartedDateTime())
+                .startedDateTime(party.getStartDate())
                 .build();
 
         return  accusationRepository.findByMemberIdAndPartyInfo(memberId, partyInfo).stream()
@@ -65,12 +64,12 @@ public class AccusationPartyMembersService {
                     byte[] byteEnc64 = Base64.encodeBase64(userResponse.getImage());
 
                     return MemberResponse.builder()
-                            .id(userResponse.getId())
-                            .name(userResponse.getName())
-                            .email(userResponse.getEmail())
-                            .department(userResponse.getDepartment())
+                            .id(userResponse.getUserId())
+                            .name(userResponse.getUserName())
+                            .email(userResponse.getUserMailAddress())
+                            .department(userResponse.getUserTeamName())
                             .image(new String(byteEnc64, StandardCharsets.UTF_8))
-                            .accusedYN(preAccusedMemberIdList.contains(userResponse.getId()))
+                            .accusedYN(preAccusedMemberIdList.contains(userResponse.getUserId()))
                             .build();
                 }).collect(Collectors.toList());
     }

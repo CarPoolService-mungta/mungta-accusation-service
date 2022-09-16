@@ -64,8 +64,8 @@ class AccusationPartyMembersControllerTest {
                 .partyId(PARTY_ID)
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
-                .startedDateTime(STARTED_DATE_TIME)
-                .memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
+                .startDate(STARTED_DATE_TIME)
+                .userIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
                 .build();
     }
 
