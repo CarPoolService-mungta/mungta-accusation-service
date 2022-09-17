@@ -1,5 +1,11 @@
 pipeline {
   agent any
+  environment {
+    IMAGE_REPO = 'mungtaregistry.azurecr.io/mungta/dev'
+    IMAGE_NAME = 'accusation-service'
+    IMAGE_TAG = env.BUILD_NUMBER
+    REGISTRY_CREDENTIALS = 'azure_service_principal'
+  }
   stages {
     stage('Build') {
         steps {
@@ -28,6 +34,25 @@ pipeline {
         steps {
             sh "./mvnw package -DskipTests"
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+        }
+    }
+    stage('Build Docker image') {
+        steps {
+            sh 'docker build --build-arg ENVIRONMENT=dev -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
+        }
+    }
+    stage('Push Docker image') {
+        steps {
+            withCredentials([azureServicePrincipal("${REGISTRY_CREDENTIALS}")]) {
+                echo '---------az login------------'
+                sh '''
+                az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+                az account set -s $AZURE_SUBSCRIPTION_ID
+                '''
+                sh 'az acr login --name mungtaregistry'
+                sh 'docker push ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
+                sh 'az logout'
+            }
         }
     }
   }
