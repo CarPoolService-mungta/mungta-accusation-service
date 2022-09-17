@@ -3,7 +3,7 @@ pipeline {
   environment {
     IMAGE_REPO = 'mungtaregistry.azurecr.io/mungta/dev'
     IMAGE_NAME = 'accusation-service'
-    IMAGE_TAG = env.BUILD_NUMBER
+    IMAGE_TAG = '$BUILD_NUMBER'
     REGISTRY_CREDENTIALS = 'azure_service_principal'
   }
   stages {
