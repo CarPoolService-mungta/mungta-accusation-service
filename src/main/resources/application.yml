@@ -65,35 +65,11 @@ spring:
 
 api:
   url:
-    user: http://localhost:8081/mungta/users
-    party: http://localhost:8082/mungta/parties
+    user: http://localhost:8081/api/user
+    party: http://localhost:8082/api/party-management/partyInfos/carpool-summary-info
 
 logging:
   level:
     org.hibernate.type: trace
     org.springframework.cloud: debug
     com.mungta.accusation: debug
-
----
-#spring:
-#  profiles: docker
-#  cloud:
-#    stream:
-#      kafka:
-#        binder:
-#          brokers: localhost:9092
-#        bindings:
-#          producer-out-0:
-#            producer:
-#              configuration:
-#                key:
-#                  serializer: org.apache.kafka.common.serialization.StringSerializer
-#      bindings:
-#        producer-out-0:
-#          destination: accusation-topic
-#          contentType: application/json
-#
-#api:
-#  url:
-#    user: http://gateway:8080
-#    party: http://gateway:8080

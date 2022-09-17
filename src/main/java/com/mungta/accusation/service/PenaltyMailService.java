@@ -30,13 +30,13 @@ public class PenaltyMailService {
 
     @Async
     public void send(AccusedMember accusedMember) {
-        log.info("PenaltyMail send to {}", accusedMember.getEmailAddress());
+        log.info("PenaltyMail send to {}", accusedMember.getEmail());
 
         try {
             MailHandler mailHandler = new MailHandler(mailSender);
 
             // 받는 사람
-            mailHandler.setTo(accusedMember.getEmailAddress());
+            mailHandler.setTo(accusedMember.getEmail());
 
             // 보내는 사람
             mailHandler.setFrom(fromEmail);

@@ -25,6 +25,6 @@ public class AccusedMemberRequest {
 
     @Schema(description = "신고 대상 회원 Email")
     @Email(message = "{email.not.valid}")
-    private String emailAddress;
+    private String email;
 
 }

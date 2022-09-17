@@ -71,10 +71,6 @@ public class Accusation {
         return this.accusationStatus != AccusationStatus.REGISTERED;
     }
 
-    public String getAccusedMemberName() {
-        return this.accusedMember.getName();
-    }
-
     public void modifyAccusationContents(AccusationContents accusationContents) {
         this.accusationContents = accusationContents;
     }

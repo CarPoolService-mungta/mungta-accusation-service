@@ -10,7 +10,7 @@ import java.util.List;
 @FeignClient(name = "user", url = "${api.url.user}")
 public interface UserServiceClient {
 
-    @GetMapping(path = "")
-    List<UserResponse> getUserList(@RequestParam List<String> memberIds);
+    @GetMapping
+    List<UserResponse> getUserList(@RequestParam List<String> userIds);
 
 }

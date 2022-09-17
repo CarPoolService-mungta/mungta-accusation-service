@@ -12,7 +12,7 @@ public class PartyResponse {
     private long partyId;
     private String placeOfDeparture;
     private String destination;
-    private String startedDateTime;
-    private List<String> memberIds;
+    private String startDate;
+    private List<String> userIds;
 
 }

@@ -38,7 +38,7 @@ class AccusationPartyMembersControllerTest {
                 .when(accusationPartyMembersService).getAccusationPartyMembers(MEMBER_ID, PARTY_ID);
 
         ResultActions result = mockMvc.perform(
-                get("/mungta/accusation/party-members")
+                get("/api/accusation/party-members")
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
                         .param("partyId", String.valueOf(PARTY_ID))
@@ -53,7 +53,8 @@ class AccusationPartyMembersControllerTest {
                 .andExpect(jsonPath("$.members.length()").value(1))
                 .andExpect(jsonPath("$.members[0].id").value(ACCUSED_MEMBER_ID))
                 .andExpect(jsonPath("$.members[0].name").value(ACCUSED_MEMBER_NAME))
-                .andExpect(jsonPath("$.members[0].emailAddress").value(ACCUSED_MEMBER_EMAIL))
+                .andExpect(jsonPath("$.members[0].email").value(ACCUSED_MEMBER_EMAIL))
+                .andExpect(jsonPath("$.members[0].department").value(ACCUSED_MEMBER_DEPARTMENT))
                 .andExpect(jsonPath("$.members[0].image").value(""))
                 .andExpect(jsonPath("$.members[0].accusedYN").value(false));
     }
@@ -63,8 +64,8 @@ class AccusationPartyMembersControllerTest {
                 .partyId(PARTY_ID)
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
-                .startedDateTime(STARTED_DATE_TIME)
-                .memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
+                .startDate(STARTED_DATE_TIME)
+                .userIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
                 .build();
     }
 
@@ -72,7 +73,8 @@ class AccusationPartyMembersControllerTest {
         MemberResponse memberResponse = MemberResponse.builder()
                 .id(ACCUSED_MEMBER_ID)
                 .name(ACCUSED_MEMBER_NAME)
-                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                .email(ACCUSED_MEMBER_EMAIL)
+                .department(ACCUSED_MEMBER_DEPARTMENT)
                 .image("")
                 .accusedYN(false)
                 .build();

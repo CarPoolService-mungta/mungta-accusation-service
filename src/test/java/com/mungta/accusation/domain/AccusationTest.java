@@ -21,7 +21,7 @@ class AccusationTest {
                         AccusedMember.builder()
                                 .id(ACCUSED_MEMBER_ID)
                                 .name(ACCUSED_MEMBER_NAME)
-                                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                                .email(ACCUSED_MEMBER_EMAIL)
                                 .build()
                 )
                 .partyInfo(
@@ -36,6 +36,7 @@ class AccusationTest {
                         new AccusationContents(CONTENTS_TITLE, CONTENTS_DESC)
                 )
                 .build();
+        accusation.setId(ACCUSATION_ID);
     }
 
     @DisplayName("신고를 등록한 회원이 아닐 경우 true 반환합니다.")

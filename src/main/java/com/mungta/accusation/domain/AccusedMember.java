@@ -18,13 +18,13 @@ public class AccusedMember {
     private String name;
 
     @Column(name = "accused_member_email", nullable = false)
-    private String emailAddress;
+    private String email;
 
     @Builder
-    public AccusedMember(String id, String name, String emailAddress) {
+    public AccusedMember(String id, String name, String email) {
         this.id = id;
         this.name = name;
-        this.emailAddress = emailAddress;
+        this.email = email;
     }
 
     @Override
@@ -33,12 +33,12 @@ public class AccusedMember {
         if (o == null || getClass() != o.getClass()) return false;
         AccusedMember that = (AccusedMember) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name)
-                && Objects.equals(emailAddress, that.emailAddress);
+                && Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, emailAddress);
+        return Objects.hash(id, name, email);
     }
 
 }

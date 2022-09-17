@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "ACCUSATION ADMIN", description = "관리자용 신고 API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/mungta/admin/accusations")
+@RequestMapping("/api/accusation/admin/accusations")
 public class AdminAccusationController {
 
     private final AdminAccusationService adminAccusationService;

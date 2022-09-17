@@ -47,8 +47,8 @@ public class AdminAccusationListResponse {
         @Schema(description = "신고 상태")
         private AccusationStatus accusationStatus;
 
-        @Schema(description = "신고 등록 시간")
-        private String createdDateTime;
+        @Schema(description = "최종 수정일")
+        private String modifiedDateTime;
 
         public static AdminAccusationInfoResponse of(Accusation accusation) {
             return AdminAccusationInfoResponse.builder()
@@ -57,8 +57,8 @@ public class AdminAccusationListResponse {
                     .memberId(accusation.getMemberId())
                     .title(accusation.getAccusationContents().getTitle())
                     .accusationStatus(accusation.getAccusationStatus())
-                    .createdDateTime(
-                            accusation.getCreatedDateTime()
+                    .modifiedDateTime(
+                            accusation.getModifiedDateTime()
                                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
                     )
                     .build();

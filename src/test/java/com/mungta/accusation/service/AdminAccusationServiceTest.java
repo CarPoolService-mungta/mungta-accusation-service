@@ -1,6 +1,7 @@
 package com.mungta.accusation.service;
 
 import com.mungta.accusation.api.dto.AccusationContentsResponse;
+import com.mungta.accusation.api.dto.AccusedMemberResponse;
 import com.mungta.accusation.api.dto.PartyInfoResponse;
 import com.mungta.accusation.api.dto.admin.AccusationStatusRequest;
 import com.mungta.accusation.api.dto.admin.AdminAccusationListResponse;
@@ -61,7 +62,7 @@ class AdminAccusationServiceTest {
                         AccusedMember.builder()
                                 .id(ACCUSED_MEMBER_ID)
                                 .name(ACCUSED_MEMBER_NAME)
-                                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                                .email(ACCUSED_MEMBER_EMAIL)
                                 .build()
                 )
                 .partyInfo(
@@ -77,7 +78,7 @@ class AdminAccusationServiceTest {
                 )
                 .build();
         accusation.setId(ACCUSATION_ID);
-        accusation.setCreatedDateTime(nowDateTime);
+        accusation.setModifiedDateTime(nowDateTime);
     }
 
     @DisplayName("[관리자] 신고 내용 조회.")
@@ -89,7 +90,11 @@ class AdminAccusationServiceTest {
 
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -121,7 +126,7 @@ class AdminAccusationServiceTest {
     @DisplayName("[관리자] 신고 내역 리스트 조회 성공.")
     @Test
     void getAccusationList() {
-        given(accusationRepository.findAll()).willReturn(List.of(accusation));
+        given(accusationRepository.findAllByOrderByCreatedDateTimeDesc()).willReturn(List.of(accusation));
 
         AdminAccusationListResponse response = adminAccusationService.getAccusationList();
         List<AdminAccusationInfoResponse> responseList = response.getAccusations();
@@ -135,7 +140,7 @@ class AdminAccusationServiceTest {
                                 .memberId(MEMBER_ID)
                                 .title(CONTENTS_TITLE)
                                 .accusationStatus(AccusationStatus.REGISTERED)
-                                .createdDateTime(nowDateTime.format(
+                                .modifiedDateTime(nowDateTime.format(
                                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                                 ))
                                 .build()
@@ -156,7 +161,11 @@ class AdminAccusationServiceTest {
         verify(penaltyMailService, times(1)).send(any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -187,7 +196,11 @@ class AdminAccusationServiceTest {
         verify(penaltyMailService, never()).send(any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)
@@ -218,7 +231,11 @@ class AdminAccusationServiceTest {
         verify(kafkaProducer, times(1)).send(anyString(), any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMemberName()).isEqualTo(ACCUSED_MEMBER_NAME),
+                () -> assertThat(response.getAccusedMember()).isEqualTo(
+                        AccusedMemberResponse.builder()
+                                .id(ACCUSED_MEMBER_ID)
+                                .name(ACCUSED_MEMBER_NAME)
+                                .build()),
                 () -> assertThat(response.getPartyInfo()).isEqualTo(
                         PartyInfoResponse.builder()
                                 .partyId(PARTY_ID)

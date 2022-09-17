@@ -40,7 +40,7 @@ public class AdminAccusationService {
     }
 
     public AdminAccusationListResponse getAccusationList() {
-        return AdminAccusationListResponse.of(accusationRepository.findAll());
+        return AdminAccusationListResponse.of(accusationRepository.findAllByOrderByCreatedDateTimeDesc());
     }
 
     @Transactional
@@ -48,7 +48,7 @@ public class AdminAccusationService {
         Accusation accusation = getAccusationById(id);
         accusation.process(request.getAccusationStatus(), request.getResultComment());
 
-        if (isCompletedStatus(accusation)) {
+        if (accusation.getAccusationStatus() == AccusationStatus.COMPLETED) {
             AccusedMember accusedMember = accusation.getAccusedMember();
 
             // 회원 시스템으로 신고당한 사람 ID 전송
@@ -60,9 +60,4 @@ public class AdminAccusationService {
         log.info("Changed to '{}' status. id: {}", request.getAccusationStatus(), id);
         return AdminAccusationResponse.of(accusation);
     }
-
-    private boolean isCompletedStatus(Accusation accusation) {
-        return accusation.getAccusationStatus() == AccusationStatus.COMPLETED;
-    }
-
 }

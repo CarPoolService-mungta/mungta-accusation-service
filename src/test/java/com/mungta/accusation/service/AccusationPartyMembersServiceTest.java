@@ -58,7 +58,8 @@ class AccusationPartyMembersServiceTest {
                         MemberResponse.builder()
                                 .id(ACCUSED_MEMBER_ID)
                                 .name(ACCUSED_MEMBER_NAME)
-                                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                                .email(ACCUSED_MEMBER_EMAIL)
+                                .department(ACCUSED_MEMBER_DEPARTMENT)
                                 .image("")
                                 .accusedYN(false)
                                 .build()
@@ -72,16 +73,17 @@ class AccusationPartyMembersServiceTest {
                 .partyId(PARTY_ID)
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
-                .startedDateTime(STARTED_DATE_TIME)
-                .memberIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
+                .startDate(STARTED_DATE_TIME)
+                .userIds(List.of(MEMBER_ID, ACCUSED_MEMBER_ID))
                 .build();
     }
 
     private List<UserResponse> getUserResponseList() {
         UserResponse userResponse = UserResponse.builder()
-                .id(ACCUSED_MEMBER_ID)
-                .name(ACCUSED_MEMBER_NAME)
-                .emailAddress(ACCUSED_MEMBER_EMAIL)
+                .userId(ACCUSED_MEMBER_ID)
+                .userName(ACCUSED_MEMBER_NAME)
+                .userMailAddress(ACCUSED_MEMBER_EMAIL)
+                .userTeamName(ACCUSED_MEMBER_DEPARTMENT)
                 .image(new byte[0])
                 .build();
         return List.of(userResponse);
