@@ -32,12 +32,15 @@ pipeline {
     }
     stage('Package') {
         steps {
-            sh "./mvnw package -DskipTests"
+            sh './mvnw package -DskipTests'
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
     stage('Build Docker image') {
         steps {
+            echo 'The build number is ${env.BUILD_NUMBER}'
+            echo 'The build number2 is ${BUILD_NUMBER}'
+            echo 'The build number3 is $BUILD_NUMBER'
             sh 'docker build --build-arg ENVIRONMENT=dev -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
         }
     }
