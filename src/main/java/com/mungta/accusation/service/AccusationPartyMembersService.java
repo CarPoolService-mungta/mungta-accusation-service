@@ -61,7 +61,7 @@ public class AccusationPartyMembersService {
     private List<MemberResponse> getMemberResponse(List<UserResponse> userList, List<String> preAccusedMemberIdList) {
         return userList.stream()
                 .map(userResponse -> {
-                    byte[] byteEnc64 = Base64.encodeBase64(userResponse.getImage());
+                    byte[] byteEnc64 = Base64.encodeBase64(userResponse.getUserPhoto());
 
                     return MemberResponse.builder()
                             .id(userResponse.getUserId())
