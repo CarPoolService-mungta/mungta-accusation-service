@@ -3,6 +3,7 @@ server:
 
 springdoc:
   swagger-ui:
+    path: /api/accusation/swagger-ui.html
     operationsSorter: method
 
 spring:
@@ -66,7 +67,7 @@ spring:
 api:
   url:
     user: http://localhost:8081/api/user
-    party: http://localhost:8082/api/party-management/partyInfos/carpool-summary-info
+    party: http://localhost:8084/api/party-management/partyInfos/carpool-summary-info
 
 logging:
   level:
