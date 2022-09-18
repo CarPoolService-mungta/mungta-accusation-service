@@ -73,10 +73,11 @@ class AccusationControllerTest {
     void addAccusation() throws Exception {
 
         doReturn(ACCUSATION_ID)
-                .when(accusationService).addAccusation(any());
+                .when(accusationService).addAccusation(anyString(), any());
 
         ResultActions result = mockMvc.perform(
                 post("/api/accusation")
+                        .header("userId", MEMBER_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(ACCUSATION_REQUEST))
@@ -95,6 +96,7 @@ class AccusationControllerTest {
 
         ResultActions result = mockMvc.perform(
                 get("/api/accusation/list/" + ACCUSATION_ID)
+                        .header("userId", MEMBER_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
         );
@@ -121,6 +123,7 @@ class AccusationControllerTest {
 
         ResultActions result = mockMvc.perform(
                 get("/api/accusation")
+                        .header("userId", MEMBER_ID)
                         .accept(MediaType.APPLICATION_JSON)
                         .param("memberId", MEMBER_ID)
         );

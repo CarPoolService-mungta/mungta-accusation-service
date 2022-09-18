@@ -3,7 +3,9 @@ pipeline {
   environment {
     IMAGE_REPO = 'mungtaregistry.azurecr.io/mungta/dev'
     IMAGE_NAME = 'accusation-service'
-    IMAGE_TAG = "${env.BUILD_NUMBER}"
+    //IMAGE_TAG = "${env.BUILD_NUMBER}"
+    IMAGE_TAG = 'latest'
+    ENVIRONMENT = 'dev'
   }
   stages {
     stage('Build') {
@@ -38,7 +40,7 @@ pipeline {
     stage('Build Docker image') {
         steps {
             echo 'The build number is ${IMAGE_TAG}'
-            sh 'docker build --build-arg ENVIRONMENT=dev -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
+            sh 'docker build --build-arg ENVIRONMENT=${ENVIRONMENT} -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
         }
     }
     stage('Push Docker image') {
@@ -55,5 +57,12 @@ pipeline {
             }
         }
     }
+//     stage('Clean Docker image') {
+//         steps {
+//             echo '---------Clean image------------'
+//             sh 'docker rmi ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
+//             sh 'docker rmi ${IMAGE_REPO}/${IMAGE_NAME}:latest'
+//         }
+//     }
   }
 }

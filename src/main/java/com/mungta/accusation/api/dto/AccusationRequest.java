@@ -14,10 +14,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class AccusationRequest {
 
-    @Schema(description = "신고 등록한 회원 ID")
-    @NotBlank(message = "{id.not.empty}")
-    private String memberId;
-
     private PartyInfoRequest partyInfo;
 
     private AccusedMemberRequest accusedMember;

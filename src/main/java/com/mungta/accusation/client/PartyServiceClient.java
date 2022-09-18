@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface PartyServiceClient {
 
     @GetMapping
-    PartyResponse getParty(@RequestParam long id);
+    PartyResponse getParty(@RequestParam long partyId);
 
 }

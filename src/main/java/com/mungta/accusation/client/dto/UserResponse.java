@@ -11,6 +11,7 @@ public class UserResponse {
     private String userName;
     private String userMailAddress;
     private String userTeamName;
-    private byte[] image;   // todo: UserDto 필드명 확인
+    private byte[] userPhoto;
+    private String fileExtension;
 
 }

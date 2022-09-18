@@ -16,10 +16,10 @@ public class AccusationPartyMembersController {
     private final AccusationPartyMembersService accusationPartyMembersService;
 
     @GetMapping
-    public ResponseEntity<AccusationPartyMemberListResponse> getAccusationPartyMembers(@RequestParam String memberId,
+    public ResponseEntity<AccusationPartyMemberListResponse> getAccusationPartyMembers(@RequestHeader("userId") String userId,
                                                                                        @RequestParam long partyId) {
         AccusationPartyMemberListResponse response =
-                accusationPartyMembersService.getAccusationPartyMembers(memberId, partyId);
+                accusationPartyMembersService.getAccusationPartyMembers(userId, partyId);
         return ResponseEntity.ok(response);
     }
 
