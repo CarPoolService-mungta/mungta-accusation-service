@@ -33,8 +33,9 @@ public class AccusationController {
             @ApiResponse(responseCode = "201", description = "신고 등록 성공")
     })
     @PostMapping
-    public ResponseEntity addAccusation(@Valid @RequestBody AccusationRequest request) {
-        long id = accusationService.addAccusation(request);
+    public ResponseEntity addAccusation(@RequestHeader("userId") String userId,
+                                        @Valid @RequestBody AccusationRequest request) {
+        long id = accusationService.addAccusation(userId, request);
         return ResponseEntity.created(URI.create("/api/accusation/list/" + id)).build();
     }
 
@@ -45,9 +46,9 @@ public class AccusationController {
                             schema = @Schema(implementation = AccusationResponse.class))})
     })
     @GetMapping("/list/{id}")
-    public ResponseEntity<AccusationResponse> getAccusation(@Parameter(description = "신고 ID") @PathVariable long id,
-                                                            @RequestParam String memberId) {
-        AccusationResponse response = accusationService.getAccusation(id, memberId);
+    public ResponseEntity<AccusationResponse> getAccusation(@RequestHeader("userId") String userId,
+                                                            @Parameter(description = "신고 ID") @PathVariable long id) {
+        AccusationResponse response = accusationService.getAccusation(id, userId);
         return ResponseEntity.ok(response);
     }
 
@@ -58,8 +59,8 @@ public class AccusationController {
                             schema = @Schema(implementation = AccusationListResponse.class))})
     })
     @GetMapping
-    public ResponseEntity<AccusationListResponse> getAccusationList(@RequestParam String memberId) {
-        AccusationListResponse response = accusationService.getAccusationList(memberId);
+    public ResponseEntity<AccusationListResponse> getAccusationList(@RequestHeader("userId") String userId) {
+        AccusationListResponse response = accusationService.getAccusationList(userId);
         return ResponseEntity.ok(response);
     }
 

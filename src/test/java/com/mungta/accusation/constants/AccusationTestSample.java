@@ -24,7 +24,6 @@ public class AccusationTestSample {
 
     static {
         ACCUSATION_REQUEST = AccusationRequest.builder()
-                .memberId(MEMBER_ID)
                 .partyInfo(
                         PartyInfoRequest.builder()
                                 .partyId(PARTY_ID)

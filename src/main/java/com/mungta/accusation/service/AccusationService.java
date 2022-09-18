@@ -22,13 +22,13 @@ public class AccusationService {
     private final AccusationRepository accusationRepository;
 
     @Transactional
-    public long addAccusation(final AccusationRequest request) {
+    public long addAccusation(final String memberId, final AccusationRequest request) {
         PartyInfoRequest partyInfo = request.getPartyInfo();
         AccusedMemberRequest accusedMember = request.getAccusedMember();
 
         long id = accusationRepository.save(
                 Accusation.builder()
-                        .memberId(request.getMemberId())
+                        .memberId(memberId)
                         .partyInfo(
                                 PartyInfo.builder()
                                         .partyId(partyInfo.getPartyId())

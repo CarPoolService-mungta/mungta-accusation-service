@@ -84,7 +84,7 @@ class AccusationPartyMembersServiceTest {
                 .userName(ACCUSED_MEMBER_NAME)
                 .userMailAddress(ACCUSED_MEMBER_EMAIL)
                 .userTeamName(ACCUSED_MEMBER_DEPARTMENT)
-                .image(new byte[0])
+                .userPhoto(new byte[0])
                 .build();
         return List.of(userResponse);
     }

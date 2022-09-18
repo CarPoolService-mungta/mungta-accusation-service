@@ -73,7 +73,7 @@ class AccusationServiceTest {
     void addAccusation() {
         given(accusationRepository.save(any())).willReturn(accusation);
 
-        long response = accusationService.addAccusation(ACCUSATION_REQUEST);
+        long response = accusationService.addAccusation(MEMBER_ID, ACCUSATION_REQUEST);
 
         assertThat(response).isEqualTo(ACCUSATION_ID);
     }

@@ -39,8 +39,8 @@ class AccusationPartyMembersControllerTest {
 
         ResultActions result = mockMvc.perform(
                 get("/api/accusation/party-members")
+                        .header("userId", MEMBER_ID)
                         .accept(MediaType.APPLICATION_JSON)
-                        .param("memberId", MEMBER_ID)
                         .param("partyId", String.valueOf(PARTY_ID))
         );
 
