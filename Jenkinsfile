@@ -37,7 +37,7 @@ pipeline {
     }
     stage('Build Docker image') {
         steps {
-            echo "The build number is ${IMAGE_TAG}"
+            echo 'The build number is ${IMAGE_TAG}'
             sh 'docker build --build-arg ENVIRONMENT=dev -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
         }
     }
