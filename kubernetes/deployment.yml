@@ -30,20 +30,20 @@ spec:
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: accusation-credentials
+                  name: mungta-credentials
                   key: db-username
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: accusation-credentials
+                  name: mungta-credentials
                   key: db-password
             - name: MAIL_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: accusation-credentials
+                  name: mungta-credentials
                   key: mail-username
             - name: MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: accusation-credentials
+                  name: mungta-credentials
                   key: mail-password
