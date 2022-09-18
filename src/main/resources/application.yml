@@ -12,9 +12,9 @@ spring:
     enabled: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mungta-accusations-db.mysql.database.azure.com:3306/accusation_db?serverTimezone=Asia/Seoul
-    username: mungta
-    password: xx
+    url: jdbc:mysql://${DB_HOST}:3306/accusation_db?serverTimezone=Asia/Seoul
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       auto-commit: false
       connection-test-query: SELECT 1
