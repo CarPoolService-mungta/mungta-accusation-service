@@ -4,7 +4,6 @@ pipeline {
     IMAGE_REPO = 'mungtaregistry.azurecr.io/mungta/dev'
     IMAGE_NAME = 'accusation-service'
     IMAGE_TAG = "${env.BUILD_NUMBER}"
-    REGISTRY_CREDENTIALS = 'azure_service_principal'
   }
   stages {
     stage('Build') {
@@ -38,14 +37,13 @@ pipeline {
     }
     stage('Build Docker image') {
         steps {
-            echo "The build number is ${BUILD_NUMBER}"
-            echo "The build number2 is ${env.BUILD_NUMBER}"
+            echo "The build number is ${IMAGE_TAG}"
             sh 'docker build --build-arg ENVIRONMENT=dev -t ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG} .'
         }
     }
     stage('Push Docker image') {
         steps {
-            withCredentials([azureServicePrincipal('${REGISTRY_CREDENTIALS}')]) {
+            withCredentials([azureServicePrincipal('azure_service_principal')]) {
                 echo '---------az login------------'
                 sh '''
                 az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
