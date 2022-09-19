@@ -76,6 +76,7 @@ pipeline {
             sed -i 's/tag:.*/tag: "${IMAGE_TAG}"/g' dev/accusation/values.yaml
             git add dev/accusation/values.yaml
             git commit -m 'Update Docker image tag: ${IMAGE_TAG}'
+            git remote set-url origin "${HELM_CHART}"
             git push origin main
           """
         }
