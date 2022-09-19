@@ -71,7 +71,7 @@ pipeline {
             git config --global credential.helper cache
             git config --global push.default simple
           """
-          git url: "${HELM_CHART}", credentialsId: 'mungta_github-ssh', branch: 'main'
+          git url: "${HELM_CHART}", credentialsId: 'mungta-github-ssh', branch: 'main'
           sh """
             sed -i 's/tag:.*/tag: "${IMAGE_TAG}"/g' dev/accusation/values.yaml
             git add dev/accusation/values.yaml
