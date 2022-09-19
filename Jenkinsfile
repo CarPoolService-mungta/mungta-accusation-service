@@ -6,7 +6,6 @@ pipeline {
     IMAGE_TAG = "${env.BUILD_NUMBER}"
     //IMAGE_TAG = 'latest'
     ENVIRONMENT = 'dev'
-    HELM_CHART = 'https://github.com/CarPoolService-mungta/mungta-argocd-helm.git'
   }
   stages {
     stage('Build') {
@@ -49,7 +48,7 @@ pipeline {
             withCredentials([azureServicePrincipal('azure_service_principal')]) {
                 echo '---------az login------------'
                 sh '''
-                az login --service-principal -u   -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+                az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
                 az account set -s $AZURE_SUBSCRIPTION_ID
                 '''
                 sh 'az acr login --name mungtaregistry'
@@ -72,7 +71,7 @@ pipeline {
             git config --global credential.helper cache
             git config --global push.default simple
           """
-          git url: '${HELM_CHART}', credentialsId: 'mungta_github', branch: 'main'
+          git url: "${HELM_CHART}", credentialsId: 'mungta_github', branch: 'main'
           sh """
             sed -i 's/tag:.*/tag: "${IMAGE_TAG}"/g' dev/accusation/values.yaml
             git add dev/accusation/values.yaml
