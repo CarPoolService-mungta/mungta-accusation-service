@@ -90,7 +90,7 @@ pipeline {
         steps {
           withCredentials([usernamePassword(credentialsId: 'mungta_argocd', usernameVariable: 'ARGOCD_USER', passwordVariable: 'ARGOCD_AUTH_PWD')]) {
             sh """
-            argocd login --insecure "${ARGOCD_URL}" --username ${ARGOCD_USER} --password ${ARGOCD_AUTH_PWD}
+            argocd login --insecure "${ArgoURL}" --username ${ARGOCD_USER} --password ${ARGOCD_AUTH_PWD}
             argocd app sync ${ARGOCD_APP} --force
             argocd app wait ${ARGOCD_APP} --timeout ${APP_WAIT_TIMEOUT}
             argocd logout ${ArgoURL}
