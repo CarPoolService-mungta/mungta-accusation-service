@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: accusation-config
-  namespace: mungta
-data:
-  log-level: debug
-  db-host: mungta-accusations-db.mysql.database.azure.com
