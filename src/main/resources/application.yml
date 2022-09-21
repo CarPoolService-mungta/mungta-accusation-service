@@ -64,6 +64,17 @@ spring:
           destination: accusation-topic
           contentType: application/json
 
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
 api:
   url:
     user: http://localhost:8081/api/user
