@@ -75,7 +75,6 @@ class AccusationPartyMembersControllerTest {
                 .name(ACCUSED_MEMBER_NAME)
                 .email(ACCUSED_MEMBER_EMAIL)
                 .department(ACCUSED_MEMBER_DEPARTMENT)
-                .image("")
                 .accusedYN(false)
                 .build();
         return List.of(memberResponse);

@@ -142,7 +142,9 @@ class AccusationServiceTest {
                 () -> assertThat(responseList.get(0)).isEqualTo(
                         AccusationInfoResponse.builder()
                                 .id(ACCUSATION_ID)
-                                .partyId(PARTY_ID)
+                                .placeOfDeparture(PLACE_OF_DEPARTURE)
+                                .destination(DESTINATION)
+                                .partyStartedDateTime(STARTED_DATE_TIME)
                                 .title(CONTENTS_TITLE)
                                 .accusationStatus(AccusationStatus.REGISTERED)
                                 .modifiedDateTime(nowDateTime.format(
