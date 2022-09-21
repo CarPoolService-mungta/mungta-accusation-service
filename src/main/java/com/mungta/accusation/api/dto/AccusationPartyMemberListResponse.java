@@ -55,7 +55,9 @@ public class AccusationPartyMemberListResponse {
         private String department;
 
         @Schema(description = "회원 사진")
-        private String image;
+        private byte[] userPhoto;
+        @Schema(description = "회원 사진 확장자")
+        private String fileExtension;
 
         @Schema(description = "전에 신고했었는지 여부")
         private boolean accusedYN;

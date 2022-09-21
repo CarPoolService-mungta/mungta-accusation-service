@@ -68,7 +68,8 @@ public class AccusationPartyMembersService {
                             .name(userResponse.getUserName())
                             .email(userResponse.getUserMailAddress())
                             .department(userResponse.getUserTeamName())
-                            .image(new String(byteEnc64, StandardCharsets.UTF_8))
+                            .userPhoto(userResponse.getUserPhoto())
+                            .fileExtension(userResponse.getFileExtension())
                             .accusedYN(preAccusedMemberIdList.contains(userResponse.getUserId()))
                             .build();
                 }).collect(Collectors.toList());

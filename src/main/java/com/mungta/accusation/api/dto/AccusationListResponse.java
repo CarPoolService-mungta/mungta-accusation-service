@@ -35,8 +35,15 @@ public class AccusationListResponse {
         @Schema(description = "신고 ID")
         private long id;
 
-        @Schema(description = "파티 ID")
-        private long partyId;
+        @Schema(description = "출발지")
+        private String placeOfDeparture;
+
+        @Schema(description = "도착지")
+        private String destination;
+
+        @Schema(description = "출발시간")
+        private String partyStartedDateTime;
+
 
         @Schema(description = "제목")
         private String title;
@@ -50,7 +57,9 @@ public class AccusationListResponse {
         public static AccusationInfoResponse of(Accusation accusation) {
             return AccusationInfoResponse.builder()
                     .id(accusation.getId())
-                    .partyId(accusation.getPartyInfo().getPartyId())
+                    .placeOfDeparture(accusation.getPartyInfo().getPlaceOfDeparture())
+                    .destination(accusation.getPartyInfo().getDestination())
+                    .partyStartedDateTime(accusation.getPartyInfo().getStartedDateTime())
                     .title(accusation.getAccusationContents().getTitle())
                     .accusationStatus(accusation.getAccusationStatus())
                     .modifiedDateTime(
