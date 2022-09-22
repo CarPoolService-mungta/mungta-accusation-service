@@ -60,6 +60,8 @@ class AccusationPartyMembersServiceTest {
                                 .name(ACCUSED_MEMBER_NAME)
                                 .email(ACCUSED_MEMBER_EMAIL)
                                 .department(ACCUSED_MEMBER_DEPARTMENT)
+                                .userPhoto(new byte[0])
+                                .fileExtension(".jpg")
                                 .accusedYN(false)
                                 .build()
                 )
@@ -84,6 +86,7 @@ class AccusationPartyMembersServiceTest {
                 .userMailAddress(ACCUSED_MEMBER_EMAIL)
                 .userTeamName(ACCUSED_MEMBER_DEPARTMENT)
                 .userPhoto(new byte[0])
+                .fileExtension(".jpg")
                 .build();
         return List.of(userResponse);
     }

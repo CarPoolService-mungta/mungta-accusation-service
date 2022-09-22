@@ -132,7 +132,6 @@ class AccusationControllerTest {
                 .andExpect(jsonPath("$.accusations").exists())
                 .andExpect(jsonPath("$.accusations.length()").value(1))
                 .andExpect(jsonPath("$.accusations[0].id").value(ACCUSATION_ID))
-                .andExpect(jsonPath("$.accusations[0].partyId").value(PARTY_ID))
                 .andExpect(jsonPath("$.accusations[0].title").value(CONTENTS_TITLE))
                 .andExpect(jsonPath("$.accusations[0].accusationStatus").value("REGISTERED"))
                 .andExpect(jsonPath("$.accusations[0].modifiedDateTime").exists());

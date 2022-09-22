@@ -55,7 +55,7 @@ class AccusationPartyMembersControllerTest {
                 .andExpect(jsonPath("$.members[0].name").value(ACCUSED_MEMBER_NAME))
                 .andExpect(jsonPath("$.members[0].email").value(ACCUSED_MEMBER_EMAIL))
                 .andExpect(jsonPath("$.members[0].department").value(ACCUSED_MEMBER_DEPARTMENT))
-                .andExpect(jsonPath("$.members[0].image").value(""))
+                .andExpect(jsonPath("$.members[0].userPhoto").exists())
                 .andExpect(jsonPath("$.members[0].accusedYN").value(false));
     }
 
@@ -75,6 +75,7 @@ class AccusationPartyMembersControllerTest {
                 .name(ACCUSED_MEMBER_NAME)
                 .email(ACCUSED_MEMBER_EMAIL)
                 .department(ACCUSED_MEMBER_DEPARTMENT)
+                .userPhoto(new byte[0])
                 .accusedYN(false)
                 .build();
         return List.of(memberResponse);

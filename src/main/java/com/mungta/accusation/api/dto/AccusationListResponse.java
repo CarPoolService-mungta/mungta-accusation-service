@@ -44,7 +44,6 @@ public class AccusationListResponse {
         @Schema(description = "출발시간")
         private String partyStartedDateTime;
 
-
         @Schema(description = "제목")
         private String title;
 
