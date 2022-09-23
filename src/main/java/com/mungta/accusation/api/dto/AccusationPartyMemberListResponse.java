@@ -56,6 +56,7 @@ public class AccusationPartyMemberListResponse {
 
         @Schema(description = "회원 사진")
         private byte[] userPhoto;
+
         @Schema(description = "회원 사진 확장자")
         private String fileExtension;
 

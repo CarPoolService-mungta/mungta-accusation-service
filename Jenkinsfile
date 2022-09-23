@@ -6,6 +6,7 @@ pipeline {
     IMAGE_TAG = "${env.BUILD_NUMBER}"
     //IMAGE_TAG = 'latest'
     ENVIRONMENT = 'dev'
+    HELM_VALUES = 'dev/accusation/values.yaml'
     ARGOCD_APP = 'mungta-accusation'
     APP_WAIT_TIMEOUT = '600'
   }
@@ -66,27 +67,27 @@ pipeline {
             sh 'docker rmi ${IMAGE_REPO}/${IMAGE_NAME}:${IMAGE_TAG}'
         }
     }
-//     stage('Update manifest') {
-//         steps {
-//           sh """
-//             git config --global user.name "${GITHUB_NAME}"
-//             git config --global user.email "${GITHUB_EMAIL}"
-//             git config --global credential.helper cache
-//             git config --global push.default simple
-//           """
-//
-//           git url: "${HELM_CHART}", credentialsId: 'mungta_github_ssh', branch: 'main'
-//           sh """
-//             sed -i 's/tag:.*/tag: "${IMAGE_TAG}"/g' dev/accusation/values.yaml
-//             git add dev/accusation/values.yaml
-//             git commit -m 'Update Docker image tag: ${IMAGE_TAG}'
-//           """
-//
-//           sshagent (credentials: ['mungta_github_ssh']) {
-//             sh 'git push origin main'
-//           }
-//         }
-//     }
+    stage('Update manifest') {
+        steps {
+          sh """
+            git config --global user.name "${GITHUB_NAME}"
+            git config --global user.email "${GITHUB_EMAIL}"
+            git config --global credential.helper cache
+            git config --global push.default simple
+          """
+
+          git url: "${HELM_CHART}", credentialsId: 'mungta_github_ssh', branch: 'main'
+          sh """
+            sed -i 's/tag:.*/tag: "${IMAGE_TAG}"/g' ${HELM_VALUES}
+            git add ${HELM_VALUES}
+            git commit -m 'Update Docker image tag: ${IMAGE_TAG}'
+          """
+
+          sshagent (credentials: ['mungta_github_ssh']) {
+            sh 'git push origin main'
+          }
+        }
+    }
 //     stage('Argo Sync') {
 //         steps {
 //           withCredentials([usernamePassword(credentialsId: 'mungta_argocd', usernameVariable: 'ARGOCD_USER', passwordVariable: 'ARGOCD_AUTH_PWD')]) {

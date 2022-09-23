@@ -9,11 +9,9 @@ import com.mungta.accusation.client.dto.PartyResponse;
 import com.mungta.accusation.client.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,19 +58,16 @@ public class AccusationPartyMembersService {
 
     private List<MemberResponse> getMemberResponse(List<UserResponse> userList, List<String> preAccusedMemberIdList) {
         return userList.stream()
-                .map(userResponse -> {
-                    byte[] byteEnc64 = Base64.encodeBase64(userResponse.getUserPhoto());
-
-                    return MemberResponse.builder()
-                            .id(userResponse.getUserId())
-                            .name(userResponse.getUserName())
-                            .email(userResponse.getUserMailAddress())
-                            .department(userResponse.getUserTeamName())
-                            .userPhoto(userResponse.getUserPhoto())
-                            .fileExtension(userResponse.getFileExtension())
-                            .accusedYN(preAccusedMemberIdList.contains(userResponse.getUserId()))
-                            .build();
-                }).collect(Collectors.toList());
+                .map(userResponse -> MemberResponse.builder()
+                        .id(userResponse.getUserId())
+                        .name(userResponse.getUserName())
+                        .email(userResponse.getUserMailAddress())
+                        .department(userResponse.getUserTeamName())
+                        .userPhoto(userResponse.getUserPhoto())
+                        .fileExtension(userResponse.getFileExtension())
+                        .accusedYN(preAccusedMemberIdList.contains(userResponse.getUserId()))
+                        .build()
+                ).collect(Collectors.toList());
     }
 
 }
