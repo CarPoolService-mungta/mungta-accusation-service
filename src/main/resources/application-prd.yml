@@ -95,7 +95,7 @@ api:
       party: http://partymanagement:8080/api/party-management/partyInfos/carpool-summary-info
 
 logging:
-  config: classpath:logging/logback-dev.xml
+  config: classpath:logging/logback-mungta-prod.xml
   level:
     org:
       hibernate:
