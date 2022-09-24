@@ -53,7 +53,7 @@ public class AdminAccusationService {
 
             // 회원 시스템으로 신고당한 사람 ID 전송
             kafkaProducer.send(BINDING_NAME,
-                    new AccusationCompleted(accusedMember.getId(), accusation.getPartyInfo().getPartyId()));
+                    new AccusationCompleted(accusedMember.getId(), accusation.getId()));
         }
         log.info("Changed to '{}' status. id: {}", request.getAccusationStatus(), id);
         return AdminAccusationResponse.of(accusation);
