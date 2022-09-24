@@ -1,22 +1,23 @@
 package com.mungta.accusation.messagequeue.event;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-public class AccusationCompleted extends AbstractEvent {
+@NoArgsConstructor
+public class PenaltyEvent extends AbstractEvent {
 
-    private final String accusedMemberId;
-    private final long accusationId;
+    private String accusedMemberId;
 
-    public AccusationCompleted(String accusedMemberId, long accusationId) {
-        super();
-        this.accusedMemberId = accusedMemberId;
-        this.accusationId = accusationId;
+    private String accusationId;
+
+    public boolean isSucceed() {
+        return PenaltyEventType.isSucceed(eventType);
     }
 
     @Override
     public String toString() {
-        return "AccusationCompleted{" +
+        return "PenaltyEvent{" +
                 "eventType='" + eventType + '\'' +
                 ", timestamp='" + timestamp + '\'' +
                 ", accusedMemberId='" + accusedMemberId + '\'' +

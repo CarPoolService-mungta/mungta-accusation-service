@@ -61,10 +61,17 @@ spring:
               configuration:
                 key:
                   serializer: org.apache.kafka.common.serialization.StringSerializer
+          consumer-in-0:
+            consumer:
+              configuration:
+                key:
+                  deserializer: org.apache.kafka.common.serialization.StringDeserializer
       bindings:
         producer-out-0:
           destination: accusation-topic
           contentType: application/json
+        consumer-in-0:
+          destination: user-topic
 
 management:
   endpoint:
@@ -79,8 +86,8 @@ management:
 
 api:
   url:
-    user: http://gateway:8080/api/user
-    party: http://gateway:8080/api/party-management/partyInfos/carpool-summary-info
+    user: http://user:8080/api/user
+    party: http://partymanagement:8080/api/party-management/partyInfos/carpool-summary-info
 
 logging:
   level:
