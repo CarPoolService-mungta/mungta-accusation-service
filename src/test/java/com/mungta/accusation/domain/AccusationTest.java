@@ -99,4 +99,14 @@ class AccusationTest {
                 .hasMessage("이미 관리자에 의해 처리된 신고글입니다.");
     }
 
+    @DisplayName("처리했던 신고 상태를 처리전 상태(REGISTERED)로 변경할 수 있습니다.")
+    @Test
+    void resetComment() {
+        process();
+        accusation.resetComment();
+
+        assertThat(accusation.getAccusationStatus()).isEqualTo(AccusationStatus.REGISTERED);
+        assertThat(accusation.getResultComment()).isEmpty();
+    }
+
 }
