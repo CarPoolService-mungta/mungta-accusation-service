@@ -34,8 +34,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: xxx@gmail.com
-    password: xxx
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -59,10 +59,17 @@ spring:
               configuration:
                 key:
                   serializer: org.apache.kafka.common.serialization.StringSerializer
+          consumer-in-0:
+            consumer:
+              configuration:
+                key:
+                  deserializer: org.apache.kafka.common.serialization.StringDeserializer
       bindings:
         producer-out-0:
           destination: accusation-topic
           contentType: application/json
+        consumer-in-0:
+          destination: user-topic
 
 management:
   endpoint:

@@ -8,8 +8,8 @@ import java.time.format.DateTimeFormatter;
 @Getter
 public class AbstractEvent {
 
-    protected final String eventType;
-    protected final String timestamp;
+    protected String eventType;
+    protected String timestamp;
 
     public AbstractEvent() {
         this.eventType = this.getClass().getSimpleName();

@@ -88,6 +88,12 @@ public class Accusation {
         return this.accusationStatus == AccusationStatus.REJECTED || this.accusationStatus == AccusationStatus.COMPLETED;
     }
 
+    public void resetComment() {
+        log.debug("Reset comment. id: {} status: {} -> {}", this.id, this.accusationStatus, AccusationStatus.REGISTERED);
+        this.accusationStatus = AccusationStatus.REGISTERED;
+        this.resultComment = "";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
