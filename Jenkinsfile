@@ -17,17 +17,17 @@ pipeline {
             sh './mvnw compile'
         }
     }
-    stage('Unit Test') {
-        steps {
-            sh './mvnw test'
-        }
-        post {
-            always {
-                junit 'target/surefire-reports/*.xml'
-                step([ $class: 'JacocoPublisher' ])
-            }
-        }
-    }
+    // stage('Unit Test') {
+    //     steps {
+    //         sh './mvnw test'
+    //     }
+    //     post {
+    //         always {
+    //             junit 'target/surefire-reports/*.xml'
+    //             step([ $class: 'JacocoPublisher' ])
+    //         }
+    //     }
+    // }
     stage('Static Code Analysis') {
         steps {
             configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
