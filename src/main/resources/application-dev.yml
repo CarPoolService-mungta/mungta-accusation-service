@@ -55,8 +55,10 @@ spring:
   cloud:
     stream:
       kafka:
+        bootstrap-servers: ${KAFKA_BROKER}
         binder:
           brokers: ${KAFKA_BROKER}
+          autoCreateTopics: true
         bindings:
           producer-out-0:
             producer:
