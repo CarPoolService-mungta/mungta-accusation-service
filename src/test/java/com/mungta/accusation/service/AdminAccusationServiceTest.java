@@ -158,7 +158,7 @@ class AdminAccusationServiceTest {
         AdminAccusationResponse response = adminAccusationService.processAccusation(ACCUSATION_ID, request);
 
         verify(kafkaProducer, times(1)).send(anyString(), any());
-        verify(penaltyMailService, times(1)).send(any());
+        //verify(penaltyMailService, times(1)).send(any());
         assertAll(
                 () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
                 () -> assertThat(response.getAccusedMember()).isEqualTo(
@@ -218,39 +218,26 @@ class AdminAccusationServiceTest {
         );
     }
 
-    @DisplayName("[관리자] 이메일 전송 중 에러가 발생해도 신고 완료 처리됨.")
+    @DisplayName("[관리자] 이메일 전송. PenaltySucceed Event 받았을 경우.")
     @Test
-    void processAccusation_to_completed_status_if_email_send_fail() {
-        AccusationStatusRequest request = new AccusationStatusRequest(AccusationStatus.COMPLETED, "코멘트 없음");
-
+    void sendPenaltyEmail() {
         given(accusationRepository.findById(ACCUSATION_ID)).willReturn(Optional.ofNullable(accusation));
-        doAnswer((i) -> new ApiException(ApiStatus.SEND_EMAIL_ERROR)).when(penaltyMailService).send(any());
 
-        AdminAccusationResponse response = adminAccusationService.processAccusation(ACCUSATION_ID, request);
+        adminAccusationService.sendPenaltyEmail(ACCUSATION_ID);
 
-        verify(kafkaProducer, times(1)).send(anyString(), any());
-        assertAll(
-                () -> assertThat(response.getId()).isEqualTo(ACCUSATION_ID),
-                () -> assertThat(response.getAccusedMember()).isEqualTo(
-                        AccusedMemberResponse.builder()
-                                .id(ACCUSED_MEMBER_ID)
-                                .name(ACCUSED_MEMBER_NAME)
-                                .build()),
-                () -> assertThat(response.getPartyInfo()).isEqualTo(
-                        PartyInfoResponse.builder()
-                                .partyId(PARTY_ID)
-                                .placeOfDeparture(PLACE_OF_DEPARTURE)
-                                .destination(DESTINATION)
-                                .startedDateTime(STARTED_DATE_TIME)
-                                .build()),
-                () -> assertThat(response.getAccusationContents()).isEqualTo(
-                        AccusationContentsResponse.builder()
-                                .title(CONTENTS_TITLE)
-                                .desc(CONTENTS_DESC)
-                                .build()),
-                () -> assertThat(response.getAccusationStatus()).isEqualTo(AccusationStatus.COMPLETED),
-                () -> assertThat(response.getResultComment()).isEqualTo(request.getResultComment())
-        );
+        verify(penaltyMailService, times(1)).send(any());
+    }
+
+    @DisplayName("[관리자] 처리했던 신고 상태를 처리전 상태(REGISTERED)로 변경. PenaltyFailed Event 받았을 경우.")
+    @Test
+    void resetComment() {
+        given(accusationRepository.findById(ACCUSATION_ID)).willReturn(Optional.ofNullable(accusation));
+        processAccusation_to_completed_status();
+
+        adminAccusationService.resetComment(ACCUSATION_ID);
+
+        assertThat(accusation.getResultComment()).isEmpty();
+        assertThat(accusation.getAccusationStatus()).isEqualTo(AccusationStatus.REGISTERED);
     }
 
 }

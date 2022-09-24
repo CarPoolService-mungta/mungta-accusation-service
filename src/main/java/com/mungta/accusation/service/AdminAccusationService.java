@@ -52,12 +52,23 @@ public class AdminAccusationService {
             AccusedMember accusedMember = accusation.getAccusedMember();
 
             // 회원 시스템으로 신고당한 사람 ID 전송
-            kafkaProducer.send(BINDING_NAME, new AccusationCompleted(accusedMember.getId()));
-
-            // 신고당한 사람에게 이메일 전송..
-            penaltyMailService.send(accusedMember);
+            kafkaProducer.send(BINDING_NAME,
+                    new AccusationCompleted(accusedMember.getId(), accusation.getPartyInfo().getPartyId()));
         }
         log.info("Changed to '{}' status. id: {}", request.getAccusationStatus(), id);
         return AdminAccusationResponse.of(accusation);
     }
+
+    public void sendPenaltyEmail(final long id) {
+        Accusation accusation = getAccusationById(id);
+        penaltyMailService.send(accusation.getAccusedMember()); // 신고당한 사람에게 이메일 전송..
+    }
+
+    @Transactional
+    public void resetComment(final long id) {
+        log.info("Reset Comment and Status.");
+        Accusation accusation = getAccusationById(id);
+        accusation.resetComment();
+    }
+
 }
