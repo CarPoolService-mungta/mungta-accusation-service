@@ -52,13 +52,12 @@ spring:
     mode: HTML
     encoding: UTF-8
     check-template-location: true
+  kafka:
+    bootstrap-servers:
+      - ${KAFKA_BROKER}
   cloud:
     stream:
       kafka:
-        streams:
-          binder:
-            brokers: ${KAFKA_BROKER}
-#        bootstrap-servers: ${KAFKA_BROKER}
         binder:
           brokers: ${KAFKA_BROKER}
           autoCreateTopics: true
