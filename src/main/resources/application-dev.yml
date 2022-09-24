@@ -56,7 +56,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: kafka-0.kafka-headless.kafka.svc.cluster.local
+          brokers: ${KAFKA_BROKER}
         bindings:
           producer-out-0:
             producer:
