@@ -19,7 +19,7 @@ public class KafkaConsumer {
 
     private final AdminAccusationService adminAccusationService;
 
-    @KafkaListener(topics = "user-topic", groupId ="mungta")
+    @KafkaListener(topics = "user-topic", groupId ="com.example")
     public void sendEmailWhenPenaltySucceed(@Payload String message) {
         log.debug("Kafka User Consumed message = " + message);
 
