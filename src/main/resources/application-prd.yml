@@ -52,6 +52,9 @@ spring:
     mode: HTML
     encoding: UTF-8
     check-template-location: true
+  kafka:
+    bootstrap-servers:
+      - ${KAFKA_BROKER}
   cloud:
     stream:
       kafka:

@@ -58,7 +58,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: ${KAFKA_BROKER}
+          brokers: localhost:9092
         bindings:
           producer-out-0:
             producer:
