@@ -169,6 +169,7 @@
 										<exclude>com/mungta/accusation/*Application.class</exclude>
 										<exclude>com/mungta/accusation/config/*</exclude>
 										<exclude>com/mungta/accusation/handler/*</exclude>
+										<exclude>com/mungta/accusation/exception/*</exclude>
 										<exclude>com/mungta/accusation/client/*</exclude>
 										<exclude>com/mungta/accusation/messagequeue/*</exclude>
 									</excludes>
