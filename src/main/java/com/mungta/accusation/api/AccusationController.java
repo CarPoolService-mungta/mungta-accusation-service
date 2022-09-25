@@ -33,7 +33,7 @@ public class AccusationController {
             @ApiResponse(responseCode = "201", description = "신고 등록 성공")
     })
     @PostMapping
-    public ResponseEntity addAccusation(@RequestHeader("userId") String userId,
+    public ResponseEntity<?> addAccusation(@RequestHeader("userId") String userId,
                                         @Valid @RequestBody AccusationRequest request) {
         long id = accusationService.addAccusation(userId, request);
         return ResponseEntity.created(URI.create("/api/accusation/list/" + id)).build();
@@ -82,7 +82,7 @@ public class AccusationController {
             @ApiResponse(responseCode = "204", description = "신고 삭제 성공")
     })
     @DeleteMapping("/list/{id}")
-    public ResponseEntity deleteAccusation(@Parameter(description = "신고 ID") @PathVariable long id) {
+    public ResponseEntity<?> deleteAccusation(@Parameter(description = "신고 ID") @PathVariable long id) {
         accusationService.deleteAccusation(id);
         return ResponseEntity.noContent().build();
     }

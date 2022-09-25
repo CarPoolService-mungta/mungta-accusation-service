@@ -13,8 +13,8 @@ class AccusedMemberTest {
         AccusedMember accusedMember = new AccusedMember("id", "name", "xx@gmail.com");
         AccusedMember other = new AccusedMember("id", "name", "xx@gmail.com");
 
-        assertThat(accusedMember.equals(other)).isTrue();
-        assertThat(accusedMember.hashCode() == other.hashCode()).isTrue();
+        assertThat(accusedMember.equals(other)).isEqualTo(true);
+        assertThat(accusedMember.hashCode() == other.hashCode()).isEqualTo(true);
     }
 
     @DisplayName("not equals test")
@@ -23,8 +23,8 @@ class AccusedMemberTest {
         AccusedMember accusedMember = new AccusedMember("id", "name", "xx@gmail.com");
         AccusedMember other = new AccusedMember("id", "name", "xx@naver.com");
 
-        assertThat(accusedMember.equals(other)).isFalse();
-        assertThat(accusedMember.hashCode() == other.hashCode()).isFalse();
+        assertThat(accusedMember.equals(other)).isEqualTo(false);
+        assertThat(accusedMember.hashCode() == other.hashCode()).isEqualTo(false);
     }
 
 }

@@ -163,7 +163,7 @@ class AccusationServiceTest {
 
         AccusationListResponse response = accusationService.getAccusationList("2");
 
-        assertThat(response.getAccusations().size()).isEqualTo(0);
+        assertThat(response.getAccusations().size()).isZero();
     }
 
     @DisplayName("[회원] 신고 내용 수정 성공.")

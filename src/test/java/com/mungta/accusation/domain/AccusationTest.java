@@ -43,14 +43,14 @@ class AccusationTest {
     @Test
     void isNotWriter_true() {
         boolean result = accusation.isNotWriter("2");
-        assertThat(result).isEqualTo(true);
+        assertThat(result).isTrue();
     }
 
     @DisplayName("신고를 등록한 회원일 경우 false 반환합니다.")
     @Test
     void isNotWriter_false() {
         boolean result = accusation.isNotWriter(MEMBER_ID);
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @DisplayName("신고 상태가 REGISTERED 가 아닌 경우 true 반환합니다.")
@@ -60,7 +60,7 @@ class AccusationTest {
 
         boolean result = accusation.isNotRegisteredStatus();
 
-        assertThat(result).isEqualTo(true);
+        assertThat(result).isTrue();
     }
 
     @DisplayName("신고 상태가 REGISTERED 인 경우 false 반환합니다.")
@@ -68,7 +68,7 @@ class AccusationTest {
     void isNotRegisteredStatus_false() {
         boolean result = accusation.isNotRegisteredStatus();
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @DisplayName("신고 제목과 신고 내용을 수정합니다.")

@@ -15,8 +15,8 @@ class PartyInfoTest {
         PartyInfo partyInfo = getNewPartyInfo(PARTY_ID);
         PartyInfo other = getNewPartyInfo(PARTY_ID);
 
-        assertThat(partyInfo.equals(other)).isTrue();
-        assertThat(partyInfo.hashCode() == other.hashCode()).isTrue();
+        assertThat(partyInfo.equals(other)).isEqualTo(true);
+        assertThat(partyInfo.hashCode() == other.hashCode()).isEqualTo(true);
     }
 
     @DisplayName("not equals test")
@@ -25,8 +25,8 @@ class PartyInfoTest {
         PartyInfo partyInfo = getNewPartyInfo(PARTY_ID);
         PartyInfo other = getNewPartyInfo(12);
 
-        assertThat(partyInfo.equals(other)).isFalse();
-        assertThat(partyInfo.hashCode() == other.hashCode()).isFalse();
+        assertThat(partyInfo.equals(other)).isEqualTo(false);
+        assertThat(partyInfo.hashCode() == other.hashCode()).isEqualTo(false);
     }
 
     private PartyInfo getNewPartyInfo(long id) {

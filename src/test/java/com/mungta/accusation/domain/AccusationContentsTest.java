@@ -13,8 +13,8 @@ class AccusationContentsTest {
         AccusationContents accusationContents = new AccusationContents("title", "desc");
         AccusationContents other = new AccusationContents("title", "desc");
 
-        assertThat(accusationContents.equals(other)).isTrue();
-        assertThat(accusationContents.hashCode() == other.hashCode()).isTrue();
+        assertThat(accusationContents.equals(other)).isEqualTo(true);
+        assertThat(accusationContents.hashCode() == other.hashCode()).isEqualTo(true);
     }
 
     @DisplayName("not equals test")
@@ -23,8 +23,8 @@ class AccusationContentsTest {
         AccusationContents accusationContents = new AccusationContents("title", "desc");
         AccusationContents other = new AccusationContents("title1", "desc");
 
-        assertThat(accusationContents.equals(other)).isFalse();
-        assertThat(accusationContents.hashCode() == other.hashCode()).isFalse();
+        assertThat(accusationContents.equals(other)).isEqualTo(false);
+        assertThat(accusationContents.hashCode() == other.hashCode()).isEqualTo(false);
     }
 
 }
