@@ -100,7 +100,7 @@ logging:
   level:
     org:
       hibernate:
-        SQL: DEBUG
+        SQL: info
         type:
           descriptor:
-            sql: TRACE
+            sql: info
