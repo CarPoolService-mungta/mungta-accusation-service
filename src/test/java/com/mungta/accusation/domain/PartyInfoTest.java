@@ -11,15 +11,27 @@ class PartyInfoTest {
 
     @DisplayName("equals test")
     @Test
-    void testEquals() {
-        PartyInfo partyInfo = getNewPartyInfo();
-        boolean result = partyInfo.equals(getNewPartyInfo());
-        assertThat(result).isTrue();
+    void testEquals_true() {
+        PartyInfo partyInfo = getNewPartyInfo(PARTY_ID);
+        PartyInfo other = getNewPartyInfo(PARTY_ID);
+
+        assertThat(partyInfo.equals(other)).isTrue();
+        assertThat(partyInfo.hashCode() == other.hashCode()).isTrue();
     }
 
-    private PartyInfo getNewPartyInfo() {
+    @DisplayName("not equals test")
+    @Test
+    void testEquals_false() {
+        PartyInfo partyInfo = getNewPartyInfo(PARTY_ID);
+        PartyInfo other = getNewPartyInfo(12);
+
+        assertThat(partyInfo.equals(other)).isFalse();
+        assertThat(partyInfo.hashCode() == other.hashCode()).isFalse();
+    }
+
+    private PartyInfo getNewPartyInfo(long id) {
         return PartyInfo.builder()
-                .partyId(PARTY_ID)
+                .partyId(id)
                 .placeOfDeparture(PLACE_OF_DEPARTURE)
                 .destination(DESTINATION)
                 .startedDateTime(STARTED_DATE_TIME)
