@@ -8,7 +8,7 @@ pipeline {
     ENVIRONMENT = 'dev'
     HELM_VALUES = 'dev/accusation/values.yaml'
     ARGOCD_APP = 'mungta-accusation'
-    APP_WAIT_TIMEOUT = '800'
+    APP_WAIT_TIMEOUT = '120000'
   }
   stages {
     stage('Build') {
