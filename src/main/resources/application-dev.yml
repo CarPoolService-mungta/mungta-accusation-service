@@ -78,6 +78,13 @@ spring:
           contentType: application/json
         consumer-in-0:
           destination: user-topic
+  application:
+    name: accusation
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://52.226.205.33:9411
 
 management:
   endpoint:
