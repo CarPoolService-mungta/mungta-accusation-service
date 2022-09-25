@@ -26,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(value = MockitoExtension.class)
 class AccusationServiceTest {
@@ -208,6 +209,13 @@ class AccusationServiceTest {
         assertThatThrownBy(() -> accusationService.modifyAccusationContents(ACCUSATION_ID, request))
                 .isInstanceOf(ApiException.class)
                 .hasMessage("이미 신고 처리된 상태라 내용을 수정할 수 없습니다.");
+    }
+
+    @DisplayName("[회원] 신고 삭제.")
+    @Test
+    void deleteAccusation() {
+        accusationService.deleteAccusation(ACCUSATION_ID);
+        verify(accusationRepository, times(1)).deleteById(ACCUSATION_ID);
     }
     
 }
